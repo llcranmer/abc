@@ -1,0 +1,10 @@
+Petroleum Engineering	94600 	175500
+Actuarial Mathematics	56400 	131700
+Actuarial Science	61200 	130800
+Nuclear Engineering	69000 	127500
+Chemical Engineering	70300 	124500
+Marine Engineering	73900 	123200
+Economics and Mathematics	60000 	122900
+Geophysics	54100 	122200
+Cognitive Science	54000 	121900
+Electrical Power Engineering	68600 	119100
