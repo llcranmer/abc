@@ -2,13 +2,13 @@
 #include "FileSystem.h"
 #include "FileSystem.cpp"
 int main () {
+
   FileSystem fileSystem;
   string fileName;
   cout << "Please enter the file: ";
   cin >> fileName;
   cout << "File Name: " << fileName << endl;
-
-  int listSize = fileSystem.inputMajorAndSalary(fileName);
+  fileSystem.inputMajorAndSalary(fileName);
 
   int portNumber;
   cout << "Enter server port number: ";
@@ -16,10 +16,12 @@ int main () {
   cin.ignore(100, '\n');
 
   int socketOpen = establish(portNumber);
-
-
   char buffer[512];
+
   string collegeMajor;
+  string stSalary;
+  string midSalary;
+
   int byte_count;
   int socketConnection;
   do {
@@ -28,8 +30,10 @@ int main () {
     byte_count = recv(socketConnection,buffer, sizeof(buffer) - 1, 0);
     collegeMajor = string(buffer);
     if(!collegeMajor.empty()) {
-      int salary = fileSystem.returnSalary(collegeMajor);
-      cout << "College Major " << collegeMajor << " starts at  $" << salary << "" << endl;
+      stSalary = fileSystem.stSalary(collegeMajor);
+      midSalary = fileSystem.midSalary(collegeMajor);
+      cout << "The average early career pay for a " << collegeMajor << " is $" << stSalary << endl;
+      cout << "The corresponding mid-career pay is $" << midSalary << endl;
       salary = salary;
       byte_count = send(socketConnection, &salary, sizeof(salary), 0);
     }

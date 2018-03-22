@@ -25,11 +25,12 @@ class FileSystem {
   public:
     FileSystem();
     int inputMajorAndSalary(string fileName);
-    int returnSalary(string name);
-
+    string stSalary(string name);
+    string midSalary(string name);
   private:
-  vector<string> collegeMajorList;
-  vector<int> salaryList;
+    vector<string> collegeMajors;
+    vector<string> stSalaryPay;
+    vector<string> midSalaryPay;
 };
 
 #endif

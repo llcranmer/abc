@@ -3,48 +3,59 @@
 using namespace std;
 
  FileSystem::FileSystem() {
-  vector<string> collegeMajorList;
-  vector<int> salaryList;
+  vector<string> collegeMajors;
+  vector<string> stSalaryPay;
+  vector<string> midSalaryPay;
 }
 int FileSystem::inputMajorAndSalary(string fileName) {
-  string data;
-  ifstream readFile;
 
-  readFile.open(fileName.c_str());
+  char collegeMajor[70];
+  char avgStSalary[10];
+  char avgMidSalary[10];
+  char line[100];
 
-  while(readFile.good()) {
-
-    readFile >> data;
-    cout << "Data: " << data << endl;
-    collegeMajorList.push_back(data);
-
-    int salary;
-
-    readFile >> salary;
-    // To do
-    // pushback the starting salary and then the mid salary
-    cout << "salary: " << salary << endl;
-    salaryList.push_back(salary);
-
+  FILE *infile;
+  infile = fopen(fileName.c_str(), "r");
+  if(!infile){
+    printf("Couldn't open %s for reading \n", fileName.c_str());
   }
-  readFile.close();
-  for(int i = 0; i <collegeMajorList.size(); ++i){
-    cout << "Here is the major: " << collegeMajorList[i] << std::endl;
+
+  int row = 0;
+  while(row < 512 && fgets(line,sizeof(line),infile) != NULL){
+    sscanf(line,"%[^\t]\t%[^\t]\t%[^\n]\n", collegeMajor, avgStSalary, avgMidSalary);
+    collegeMajors.push_back(collegeMajor);
+    stSalaryPay.push_back(avgStSalary);
+    midSalaryPay.push_back(avgMidSalary);
+    ++row;
   }
-  return collegeMajorList.size();
+  return collegeMajors.size();
 }
 
-int FileSystem::returnSalary(string name) {
-  int salaryIndex = -1;
-  for (int i = 0; i < collegeMajorList.size(); i++) {
-    if(name == collegeMajorList[i]) {
-      salaryIndex = i;
+string FileSystem::stSalary(string name){
+  int stSalaryIndex = -1;
+  for(int i = 0; i < collegeMajors.size(); ++i){
+    if(name == collegeMajors[i]) {
+      stSalaryIndex = i;
     }
   }
-  if(salaryIndex < 0) {
+  if(stSalaryIndex < 0){
     srand(time(0));
     return rand() % 66 + 11;
   } else {
-    return salaryList[salaryIndex];
+    return stSalaryPay[stSalaryIndex];
+  }
+}
+
+string FileSystem::midSalary(string name){
+  int midSalaryIndex = -1;
+  for(int i = 0; i < collegeMajors.size(); ++i){
+    if(name == collegeMajors[i]) {
+      midSalaryIndex = i;
+    }
+  }
+  if(midSalaryIndex < 0){
+    return "blue";
+  } else {
+    return midSalaryPay[midSalaryIndex];
   }
 }
