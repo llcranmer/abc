@@ -23,6 +23,7 @@ using namespace std;
 
 class FileSystem {
   public:
+    string NOT_FOUND_ERROR = "DNE";
     FileSystem();
     int inputMajorAndSalary(string fileName);
     string stSalary(string name);

@@ -3,6 +3,7 @@
 using namespace std;
 
  FileSystem::FileSystem() {
+
   vector<string> collegeMajors;
   vector<string> stSalaryPay;
   vector<string> midSalaryPay;
@@ -23,7 +24,9 @@ int FileSystem::inputMajorAndSalary(string fileName) {
   int row = 0;
   while(row < 512 && fgets(line,sizeof(line),infile) != NULL){
     sscanf(line,"%[^\t]\t%[^\t]\t%[^\n]\n", collegeMajor, avgStSalary, avgMidSalary);
+    // cout << "college major " << collegeMajor << endl;
     collegeMajors.push_back(collegeMajor);
+
     stSalaryPay.push_back(avgStSalary);
     midSalaryPay.push_back(avgMidSalary);
     ++row;
@@ -33,27 +36,32 @@ int FileSystem::inputMajorAndSalary(string fileName) {
 
 string FileSystem::stSalary(string name){
   int stSalaryIndex = -1;
+
+
   for(int i = 0; i < collegeMajors.size(); ++i){
     if(name == collegeMajors[i]) {
       stSalaryIndex = i;
     }
   }
-  if(stSalaryIndex < 0){
-    return "That major is not in the table.";
+  if(stSalaryIndex == -1){
+
+    return NOT_FOUND_ERROR;
   } else {
+
     return stSalaryPay[stSalaryIndex];
   }
 }
 
 string FileSystem::midSalary(string name){
   int midSalaryIndex = -1;
+
   for(int i = 0; i < collegeMajors.size(); ++i){
     if(name == collegeMajors[i]) {
       midSalaryIndex = i;
     }
   }
-  if(midSalaryIndex < 0){
-    return "blue";
+  if(midSalaryIndex == -1){
+    return NOT_FOUND_ERROR;
   } else {
     return midSalaryPay[midSalaryIndex];
   }

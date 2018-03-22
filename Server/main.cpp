@@ -29,12 +29,14 @@ int main () {
     collegeMajor = string(buffer);
 
     if(!collegeMajor.empty()) {
-      
+
+
       string stSalary = fileSystem.stSalary(collegeMajor);
       string midSalary = fileSystem.midSalary(collegeMajor);
 
       byte_count = send(socketConnection, &stSalary, sizeof(stSalary), 0);
       byte_count = send(socketConnection, &midSalary, sizeof(midSalary), 0);
+    
 
     }
   } while(socketConnection > 0);
