@@ -15,9 +15,11 @@ int main() {
 
 
   std::string collegeMajor;
-  int salary, byte_count;
-  std::cin.ignore (256, '\n');
+  std::string stSalary;
+  std::string midSalary;
+  int byte_count;
 
+  std::cin.ignore (256, '\n');
 
   do {
     std::cout << "Enter a college major: ";
@@ -26,9 +28,12 @@ int main() {
 
     if (!collegeMajor.empty()) {
       byte_count = send(socketNumber, collegeMajor.c_str(), collegeMajor.size(), 0);
-      byte_count = recv(socketNumber, &salary, sizeof(salary), 0);
-      salary = ntohs(salary); // ntohs
-      std::cout << "The average early career pay for a " << collegeMajor << " is $" << salary << std::endl;
+      byte_count = recv(socketNumber, &stSalary, sizeof(stSalary), 0);
+      std::cout << "The average early career pay for a " << collegeMajor << " is $" << stSalary << std::endl;
+      byte_count = recv(socketNumber, &midSalary, sizeof(midSalary), 0);
+      std::cout << "byte count: " << byte_count << std::endl;
+      std::cout << "The corresponding mid-career pay is $"<< midSalary << std::endl;
+
     }
 
     byte_count = close(socketNumber);

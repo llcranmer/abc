@@ -39,8 +39,7 @@ string FileSystem::stSalary(string name){
     }
   }
   if(stSalaryIndex < 0){
-    srand(time(0));
-    return rand() % 66 + 11;
+    return "That major is not in the table.";
   } else {
     return stSalaryPay[stSalaryIndex];
   }
